@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signin</title>
+</head>
+<body>
+    <div>
+        {% for message in messages %}
+        <h4> {{message}} </h4>
+        {% endfor %}
+        <form method="post", action="signin">
+            {% csrf_token %}
+            <h5>Sign in</h5>
+            <input type="text" name="username" placeholder="create username">
+            <input type="password" name="password" placeholder="Input Password">
+            <input type="submit" value="submit">
+       </form>
+       </div>
+</body>
+</html>

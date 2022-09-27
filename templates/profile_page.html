@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>profile page</title>
+</head>
+<body>
+    <nav>
+        
+        <h4>God is good</h4>
+
+        <button><a href=" {% url 'createform' %} ">Create form</a></button>
+        {% for room in rooms %}
+        <div>
+            <span>{{room.host.username}}</span>
+            <a href="{% url 'update' room.id %}">Update</a> 
+            <a href="{% url 'delete' room.id %}">delete</a> 
+           <a href=" {% url 'profile' room.id %} "> <h5> {{room.id}} -- {{room.name}} </h5></a>
+        </div>
+        {% endfor %}
+    </nav>
+</body>
+</html>

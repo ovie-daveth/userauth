@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <nav>
+        
+        <h4>Welcome {{user.email}} </h4>
+        <a href="{% url 'signout' %}">signout</a>
+        <button><a href=" {% url 'createform' %} ">Create form</a></button>
+        {% for room in rooms %}
+        
+        <div>
+            <span>{{room.host.username}}</span>
+            <a href="{% url 'update' room.id %}">Update</a> 
+            <a href="{% url 'delete' room.id %}">delete</a> 
+           <a href=" {% url 'profile' room.id %} "> <h5> {{room.id}} -- {{room.name}} </h5></a>
+        </div>
+        {% endfor %}
+    </nav>
+    {% else %}
+   <div>
+       <h4>To assess this site you must sign up and <a href=" {% url 'signin' %} ">sign in</a> </h4>
+       {% for message in messages %}
+       <h4> {{message}} </h4>
+       {% endfor %}
+       <form method="post", action="/">
+        {% csrf_token %}
+            <h5>Sign Up</h5>
+            <input type="text" name="username" placeholder="create username"><br>
+            <input type="email" name="email" placeholder="Enter a valid email address"><br>
+            <input type="text" name="firstname" placeholder="Enter First Name"><br>
+            <input type="text" name="lastname" placeholder="Enter Last Name"><br>
+            <input type="password" name="password" placeholder="Enter Password"><br>
+            <input type="password" name="password2" placeholder="Comfirm Password"><br>
+            <input type="submit" value="submit">
+       </form>
+   </div>
+   {% endif %}
+</body>
+</html>
